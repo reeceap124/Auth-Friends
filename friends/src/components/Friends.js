@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {axiosAuth} from '../utils/axiosAuth';
 
-const Friends = () => {
+export const Friends = () => {
     const [friends, setFriends] = useState([])
 
     useEffect(()=>{
-        axiosWithAuth()
+        axiosAuth()
         .get('/friends')
         .then(res => {
-            console.log('get res', res)
+            console.log('get res', res.data)
+            setFriends((u)=>[...u, res.data])
         })
         .catch(err => {
             console.log('get error', err)

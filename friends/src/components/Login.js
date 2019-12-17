@@ -3,6 +3,7 @@ import { axiosAuth } from '../utils/axiosAuth';
 
 
 export const Login = props => {
+    
     const [isLoading, setIsLoading] = useState(false)
     const [credentials, setCredentials] = useState({
         username: '',
@@ -21,6 +22,8 @@ export const Login = props => {
             .post('/login', credentials)
             .then(res => {
                 console.log('login res',res)
+                localStorage.setItem('token', res.data.payload)
+                props.history.push('/friends');
             })
             .catch(err=> console.log('login error',err))
             .finally(()=>{
@@ -30,14 +33,15 @@ export const Login = props => {
                         username: '',
                         password: ''
                     })
+
                 )
             })
     }
     return (
         <div>
             <form onSubmit={login}>
-                <input type='text' name='username' placeholder='Username' onChange={handleChange}/>
-                <input type='password' name='password' placeholder='Password' onChange={handleChange}/>
+                <input type='text' name='username' placeholder='Username' onChange={handleChange} value={credentials.username}/>
+                <input type='password' name='password' placeholder='Password' onChange={handleChange} value={credentials.password}/>
                 <button disabled={isLoading} type='submit'>{isLoading ? 'Loading...' : 'Login'}</button>
             </form>
         </div>
