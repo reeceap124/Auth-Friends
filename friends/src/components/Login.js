@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { axiosAuth } from '../utils/axiosAuth';
 
 
 export const Login = props => {
@@ -14,11 +15,14 @@ export const Login = props => {
     }
     const login = e => {
         e.preventDefault();
-        
+        axiosAuth()
+            .post('/login', credentials)
+            .then(res => console.log(res))
+            .catch(err=> console.log(err))
     }
     return (
         <div>
-            <form>
+            <form onSubmit={login}>
                 <input type='text' name='username' placeholder='Username' onChange={handleChange}/>
                 <input type='password' name='password' placeholder='Password' onChange={handleChange}/>
                 <button type='submit'>Login</button>
