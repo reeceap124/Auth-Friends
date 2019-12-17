@@ -20,9 +20,9 @@ export const Login = props => {
         axiosAuth()
             .post('/login', credentials)
             .then(res => {
-                console.log(res)
+                console.log('login res',res)
             })
-            .catch(err=> console.log(err))
+            .catch(err=> console.log('login error',err))
             .finally(()=>{
                 return(
                     setIsLoading(false),
