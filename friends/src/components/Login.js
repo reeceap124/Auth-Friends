@@ -12,6 +12,10 @@ export const Login = props => {
             [e.target.name]: e.target.value
         })
     }
+    const login = e => {
+        e.preventDefault();
+        
+    }
     return (
         <div>
             <form>
